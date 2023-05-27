@@ -143,7 +143,6 @@ public class ContratosTelefController {
     }
 
 
-
     // Metodo Solicitar
     @GetMapping("/solicitar/{id}")
     public String mostrarFormularioEditarServicio(@PathVariable(name = "id") Long id, Model model) {
@@ -177,7 +176,6 @@ public class ContratosTelefController {
         model.addAttribute("titulo", "Ofertar Nauta");
         return "ofertar3";
     }
-
 
 
     // Metodo Eliminar
@@ -226,8 +224,8 @@ public class ContratosTelefController {
     @GetMapping("/buscaplantasitio")
     public String buscaplantasitio(@RequestParam(name = "nombpta", defaultValue = "") String nombpta,
                                    @RequestParam(name = "sitio", defaultValue = "") String sitio,
-                                  @PageableDefault(size = 10, sort = "id") Pageable pageable,
-                                  Model model) {
+                                   @PageableDefault(size = 10, sort = "id") Pageable pageable,
+                                   Model model) {
         Page<ContratosTelef> contratosTelefs = contratoServicio.findByPlantaSitio(nombpta, sitio, pageable);
         PageRender<ContratosTelef> pageRender = new PageRender<>("/buscaplantasitio?planta=" + nombpta + "&sitio=" + sitio, contratosTelefs);
         model.addAttribute("titulo", "Oferta por Planta y Sitio");

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/layout :: head}"></head>
+<body class="bg-body-secondary" style="align-item:center">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card border-0 shadow rounded-3 my-5">
+            <div class="card-body p-4 p-sm-5">
+                <div class="container flex" style="text-align:center">
+                    <h1 class="text-secondary text-center">Bienvenido</h1>
+                    <br>
+                    <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                        <a class="btn btn-primary" href="/buscar">Introducir demandas</a>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                Realizar Ofertas
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/listado">Oferta por solicitante</a></li>
+                                <li><a class="dropdown-item" href="/listaserv">Oferta por servicio</a></li>
+                                <li><a class="dropdown-item" href="/listaplants">Oferta por Planta Telefónica/Sitio</a></li>
+                                <li><a class="dropdown-item" href="#">Imprimir oferta</a></li>
+                            </ul>
+                        </div>
+                        <a class="btn btn-primary" href="#">Chequear disponibilidad en DSLAM</a>
+                        <a class="btn btn-primary" href="#">Control de ofertas realizadas</a>
+                        <a class="btn btn-primary" href="#">Reportes y estadisticas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{layout/layout :: footer}"></footer>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/layout :: head}"></head>
+<body class="bg-body-secondary">
+<header th:replace="~{layout/layout :: header}"></header>
+
+<div class="py-4 m-lg-5 flex-md-column">
+    <div class="card bg-light">
+        <div class="card-header"><h2 class="text-secondary" th:text="${titulo}"></h2></div>
+        <div class="card-body">
+
+            <!-- Formulario de busqueda -->
+            <div>
+                <form class="d-flex form-inline" th:action="@{/buscaplantasitio}">
+                    <div class="form-floating col-xs-4">
+                        <input type="text" class="form-control" id="planta" name="planta"
+                               placeholder="Planta">
+                        <label for="planta">Introducir Planta</label>
+                    </div>
+                    &nbsp;
+                    <div class="form-floating col-xs-4">
+                        <input type="text" class="form-control" id="sitio" name="sitio"
+                               placeholder="Sitio">
+                        <label for="sitio">Introducir Sitio</label>
+                    </div>
+
+                    <!-- Intento de hacerlo con lista desplegable -->
+                    <!--    <select name="planta" class="form-select" aria-label=".form-select-lg example">
+                            <option value="">Selecciona un contrato</option>
+                            <option th:each="contrato : ${contratosTelefs}" th:value="${contrato.nombpta}"
+                                    th:text="${contrato.nombpta}"></option>
+                        </select>
+
+                    </div>
+                    <div class="form-floating col-xs-4">
+                        <select name="sitio" class="form-select" aria-label=".form-select-lg example">
+                            <option value="">Selecciona un contrato</option>
+                            <option th:each="contrato : ${contratosTelefs}" th:value="${contrato.sitio}"
+                                    th:text="${contrato.sitio}"></option>
+                        </select>
+                    </div>
+                    -->
+                    <button type="submit" class="btn btn-primary" style="margin-left: 1em">Buscar</button>
+                    &nbsp;
+                    <button type="button" class="btn btn-secondary" style="margin-left: 1em" value="limpiar"
+                            onclick="limpiarCampos()">Limpiar
+                    </button>
+                </form>
+            </div>
+            <br>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Servicio</th>
+                        <th>ED</th>
+                        <th>Nombre y Apellidos</th>
+                        <th>Oficina Comercial</th>
+                        <th>Planta</th>
+                        <th>Sitio</th>
+                        <th>Fecha Entrada</th>
+                        <th>Solicitado</th>
+                        <th>Fecha Autorizo</th>
+                        <th>Ofertado</th>
+                        <th>Observacion</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tbody>
+                    <tr th:each="contratostelef: ${contratosTelefs}">
+                        <td th:text="${contratostelef.servicio}"></td>
+                        <td th:text="${contratostelef.ed}"></td>
+                        <td th:text="${contratostelef.nombre}"></td>
+                        <td th:text="${contratostelef.oficina_comercial}"></td>
+                        <td th:text="${contratostelef.nombpta}"></td>
+                        <td th:text="${contratostelef.sitio}"></td>
+                        <td th:text="${contratostelef.fecha_entrada}"></td>
+                        <td th:text="${contratostelef.solicitado}"></td>
+                        <td th:text="${contratostelef.fecha_autorizo}"></td>
+                        <td th:text="${contratostelef.ofertado}"></td>
+                        <td th:text="${contratostelef.observacion}"></td>
+                        <td>
+                            <a class="btn btn-warning" th:href="@{'/ofertar3/' + ${contratostelef.id}}" id="prueba">Ofertar</a>
+                            <!--     &nbsp;
+                                   <a class="btn btn-danger" th:href="@{'/eliminar/' + ${contratostelef.id}}">Eliminar</a> -->
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <nav th:replace="~{layout/paginator-nav :: paginator}"></nav>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    function limpiarCampos(){
+    window.location='/listaplants'
+    }
+    </script>
+    <footer th:replace="~{layout/layout :: footer}"></footer>
+</body>
+</html>

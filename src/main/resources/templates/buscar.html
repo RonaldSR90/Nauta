@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/layout :: head}"></head>
+<body class="bg-body-secondary">
+<header th:replace="~{layout/layout :: header}"></header>
+
+<div class="py-4 m-lg-5 flex-md-column">
+    <div class="card bg-light">
+        <div class="card-header"><h2 class="text-secondary" th:text="${titulo}"></h2></div>
+        <div class="card-body">
+
+            <!-- Formulario de Busqueda -->
+            <div>
+                <form class="d-flex " th:action="@{/buscar}">
+                    <div class="form-floating col-xs-4">
+                        <input type="text" class="form-control" id="servicio" name="servicio"
+                               placeholder="Servicio a buscar">
+                        <label for="servicio"> Servicio a buscar</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="margin-left: 1em">Buscar</button>
+                    &nbsp;
+                    <button type="button" class="btn btn-secondary" style="margin-left: 1em" value="limpiar"
+                            onclick="limpiarCampos()">Limpiar
+                </form>
+            </div>
+            <br>
+            <!-- Tabla que muestra la informacion -->
+            <div class="table-responsive">
+                <table class="table table-striped align-middle">
+                    <thead>
+                    <tr>
+                        <th>Servicio</th>
+                        <th>ED</th>
+                        <th>Nombre</th>
+                        <th>Direccion</th>
+                        <th>Centro Telef</th>
+                        <th>Oficina comercial</th>
+                        <th>Tipo cliente</th>
+                        <th>Categoria cliente</th>
+                        <th>Planta</th>
+                        <th>Sitio</th>
+                        <th>Fecha entrada</th>
+                        <th>Solicitado por:</th>
+                        <th>Observacion</th>
+                        <th>Ofertado</th>
+                        <th>Fecha autorizo</th>
+                        <th>Fecha Alta</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                    <tr th:each="contratostelef: ${ContratosTelef}">
+                        <td th:text="${contratostelef.servicio}"></td>
+                        <td th:text="${contratostelef.ed}"></td>
+                        <td th:text="${contratostelef.nombre}"></td>
+                        <td th:text="${contratostelef.direccion}"></td>
+                        <td th:text="${contratostelef.centrotelec}"></td>
+                        <td th:text="${contratostelef.oficina_comercial}"></td>
+                        <td th:text="${contratostelef.tcliente}"></td>
+                        <td th:text="${contratostelef.cat_cliente}"></td>
+                        <td th:text="${contratostelef.nombpta}"></td>
+                        <td th:text="${contratostelef.sitio}"></td>
+                        <td th:text="${contratostelef.fecha_entrada}"></td>
+                        <td th:text="${contratostelef.solicitado}"></td>
+                        <td th:text="${contratostelef.observacion}"></td>
+                        <td th:text="${contratostelef.ofertado}"></td>
+                        <td th:text="${contratostelef.fecha_autorizo}"></td>
+                        <td th:text="${contratostelef.fecha_alta}"></td>
+                        <td><a class="btn btn-warning" th:href="@{'/solicitar/' + ${contratostelef.id}}">Solicitar</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function limpiarCampos(){
+    window.location='/buscar'
+    }
+</script>
+<footer th:replace="~{layout/layout :: footer}"></footer>
+</body>
+</html>

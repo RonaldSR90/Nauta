@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/layout :: head}"></head>
+<body class="bg-body-secondary">
+<header th:replace="~{layout/layout :: header}"></header>
+<br>
+<div class="container">
+    <h1 class="text-secondary" th:text="${titulo}"></h1>
+    <br>
+    <form class="d-flex " th:action="@{/prueba}" th:object="${ContratosTelef}">
+        <div class="form-floating col-xs-4">
+            <input type="text" class="form-control" id="servicio" name="servicio" placeholder="Servicio a buscar">
+            <label for="servicio"> Servicio a buscar</label>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-left: 1em">Buscar</button>
+    </form>
+    <br>
+
+    <!-- informacion en bloques -->
+    <div class="d-flex flex-row mb-3">
+        <div class="card" style="width: 18rem;">
+            <div class="card-header bg-primary text-light text-uppercase">
+                Servicio
+            </div>
+            <ul class="list-group list-group-flush"
+                th:each="contratostelef: ${ContratosTelef}">
+                <li class="list-group-item" th:text="${contratostelef.servicio}"></li>
+            </ul>
+        </div>
+        <br>
+        <div class="card flex-fill">
+            <div class="card-header bg-primary text-light text-uppercase">
+                Nombre
+            </div>
+            <ul class="list-group list-group-flush"
+                th:each="contratostelef: ${ContratosTelef}">
+                <li class="list-group-item" th:text="${contratostelef.nombre}"></li>
+            </ul>
+        </div>
+        <br>
+        <div class="card" style="width: 18rem;">
+            <div class="card-header bg-primary text-light text-uppercase">
+                Direccion
+            </div>
+            <ul class="list-group list-group-flush"
+                th:each="contratostelef: ${ContratosTelef}">
+                <li class="list-group-item" th:text="${contratostelef.direccion}"></li>
+            </ul>
+        </div>
+        <br>
+        <div class="card" style="width: 18rem;">
+            <div class="card-header bg-primary text-light text-uppercase">
+                ED
+            </div>
+            <ul class="list-group list-group-flush"
+                th:each="contratostelef: ${ContratosTelef}">
+                <li class="list-group-item" th:text="${contratostelef.ed}"></li>
+            </ul>
+        </div>
+        <br>
+        <div class="card" style="width: 18rem;">
+            <div class="card-header bg-primary text-light text-uppercase">
+                Centro Telefonico
+            </div>
+            <ul class="list-group list-group-flush"
+                th:each="contratostelef: ${ContratosTelef}">
+                <li class="list-group-item" th:text="${contratostelef.centrotelec}"></li>
+            </ul>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <div class="card-header bg-primary text-light text-uppercase">
+                Ofertado
+            </div>
+            <ul class="list-group list-group-flush"
+                th:each="contratostelef: ${ContratosTelef}">
+                <li class="list-group-item" th:text="${contratostelef.ofertado}"></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Solicitar Demanda
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!--
+                    <ul th:each="contratostelef: ${ContratosTelef}">
+                        <li th:text="${contratostelef.servicio}"></li>
+                        <li th:text="${contratostelef.nombre}"></li>
+                        <li th:text="${contratostelef.direccion}"></li>
+                        <li th:text="${contratostelef.ed}"></li>
+                    </ul>
+                    -->
+                    <form th:action="@{/guardar}" th:each="contratostelef: ${ContratosTelef}" method="post">
+                        <label for="ofertado">Ofertado</label>
+                        <input type="text" id="ofertado">
+                        <label for="servicio">servicio</label>
+                        <input type="text" id="servicio">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{layout/layout :: footer}"></footer>
+</body>
+</html>

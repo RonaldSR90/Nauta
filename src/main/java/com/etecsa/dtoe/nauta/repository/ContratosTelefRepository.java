@@ -45,4 +45,9 @@ public interface ContratosTelefRepository extends JpaRepository<ContratosTelef, 
     @Query("SELECT c FROM ContratosTelef c WHERE c.nombpta LIKE %?1% AND c.sitio LIKE %?2%")
     Page<ContratosTelef> findByPlantaSitio(@Param("nombpta") String nombpta, @Param("sitio") String sitio, Pageable pageable);
 
+    //para hacer la lista de la busqueda por solicitado
+    @Query("SELECT DISTINCT solicitado FROM ContratosTelef ORDER BY solicitado")
+    List<String> findDistinctSolicitado();
+
+
 }

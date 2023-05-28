@@ -61,4 +61,9 @@ public class ContratoServicio {
         return contratosTelefRepository.findByPlantaSitio(nombpta, sitio, pageable);
     }
 
+    // Para hacer la lista en solicitado por
+    public List<String> findDistinctSolicitado(){
+        return contratosTelefRepository.findDistinctSolicitado();
+    }
+
 }

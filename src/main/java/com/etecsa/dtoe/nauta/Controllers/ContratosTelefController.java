@@ -209,14 +209,24 @@ public class ContratosTelefController {
 
     // Metodo para Buscar por solicitado
     @GetMapping("/buscasolicitado")
-    public String buscasolicitado(@RequestParam(name = "solicitado", defaultValue = "") String solicitado,
+    public String buscasolicitado(@RequestParam(name = "solicitado", defaultValue = "todos") String solicitado,
                                   @PageableDefault(size = 10, sort = "id") Pageable pageable,
                                   Model model) {
-        Page<ContratosTelef> contratosTelefs = contratoServicio.findBySolicitado(solicitado, pageable);
+        // Obtener los valores únicos de la columna solicitado
+        List<String> valoresUnicos = contratoServicio.findDistinctSolicitado();
+
+        Page<ContratosTelef> contratosTelefs;
+        if (solicitado.equals("todos")) {
+            contratosTelefs = contratoServicio.findBySolicitadoIsNotNull(pageable);;
+        } else {
+            contratosTelefs = contratoServicio.findBySolicitado(solicitado, pageable);
+        }
+
         PageRender<ContratosTelef> pageRender = new PageRender<>("/buscasolicitado?solicitado=" + solicitado, contratosTelefs);
         model.addAttribute("titulo", "Oferta por solicitante");
         model.addAttribute("contratosTelefs", contratosTelefs);
         model.addAttribute("page", pageRender);
+        model.addAttribute("valoresUnicos", valoresUnicos);
         return "listado";
     }
 
@@ -233,6 +243,7 @@ public class ContratosTelefController {
         model.addAttribute("page", pageRender);
         return "listaplants";
     }
+
 /*
     @RequestMapping("/editar/{id}")
     public ModelAndView mostrarFormularioEditarServicio(@PathVariable(name = "id") Long id) {

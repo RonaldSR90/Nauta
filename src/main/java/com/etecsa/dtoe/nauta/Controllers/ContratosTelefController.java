@@ -85,6 +85,10 @@ public class ContratosTelefController {
     @GetMapping("/listado")
     public String listadoContratos(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
         Pageable pageRequest = PageRequest.of(page, 10, Sort.by("id"));
+// para la busqieda con select
+        List<String> valoresUnicos = contratoServicio.findDistinctSolicitado();
+        model.addAttribute("valoresUnicos", valoresUnicos);
+
         Page<ContratosTelef> contratosTelefs = contratoServicio.findBySolicitadoIsNotNull(pageRequest);
         PageRender<ContratosTelef> pageRender = new PageRender<>("/listado", contratosTelefs);
         model.addAttribute("titulo", "Oferta por solicitante");
@@ -217,7 +221,8 @@ public class ContratosTelefController {
 
         Page<ContratosTelef> contratosTelefs;
         if (solicitado.equals("todos")) {
-            contratosTelefs = contratoServicio.findBySolicitadoIsNotNull(pageable);;
+            contratosTelefs = contratoServicio.findBySolicitadoIsNotNull(pageable);
+            ;
         } else {
             contratosTelefs = contratoServicio.findBySolicitado(solicitado, pageable);
         }

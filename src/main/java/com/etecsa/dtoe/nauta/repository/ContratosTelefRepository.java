@@ -49,5 +49,12 @@ public interface ContratosTelefRepository extends JpaRepository<ContratosTelef, 
     @Query("SELECT DISTINCT solicitado FROM ContratosTelef ORDER BY solicitado")
     List<String> findDistinctSolicitado();
 
+    //lista desplegable para la busqueda por planta y stio
+    @Query("SELECT DISTINCT nombpta FROM ContratosTelef ORDER BY nombpta")
+    List<String> findPlanta();
+
+    @Query("SELECT DISTINCT sitio FROM ContratosTelef ORDER BY sitio")
+    List<String> findSitio();
+
 
 }

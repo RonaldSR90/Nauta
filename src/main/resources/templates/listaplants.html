@@ -13,7 +13,7 @@
             <div>
                 <form class="d-flex form-inline" th:action="@{/buscaplantasitio}">
                     <div class="form-floating col-xs-4">
-                        <input type="text" class="form-control" id="planta" name="planta"
+                <!--        <input type="text" class="form-control" id="planta" name="planta"
                                placeholder="Planta">
                         <label for="planta">Introducir Planta</label>
                     </div>
@@ -22,24 +22,26 @@
                         <input type="text" class="form-control" id="sitio" name="sitio"
                                placeholder="Sitio">
                         <label for="sitio">Introducir Sitio</label>
-                    </div>
+                    </div>    -->
 
                     <!-- Intento de hacerlo con lista desplegable -->
-                    <!--    <select name="planta" class="form-select" aria-label=".form-select-lg example">
-                            <option value="">Selecciona un contrato</option>
-                            <option th:each="contrato : ${contratosTelefs}" th:value="${contrato.nombpta}"
-                                    th:text="${contrato.nombpta}"></option>
+                        <select name="planta" class="form-select" aria-label=".form-select-lg example">
+                            <option value="">Selecciona Planta</option>
+                            <th:block th:each="valor : ${valorPlanta}">
+                                <option th:value="${valor}" th:text="${valor}"></option>
+                            </th:block>
                         </select>
 
                     </div>
                     <div class="form-floating col-xs-4">
                         <select name="sitio" class="form-select" aria-label=".form-select-lg example">
-                            <option value="">Selecciona un contrato</option>
-                            <option th:each="contrato : ${contratosTelefs}" th:value="${contrato.sitio}"
-                                    th:text="${contrato.sitio}"></option>
+                            <option value="">Selecciona Sitio</option>
+                            <th:block th:each="valo : ${valorSitio}">
+                                <option th:value="${valo}" th:text="${valo}"></option>
+                            </th:block>
                         </select>
                     </div>
-                    -->
+
                     <button type="submit" class="btn btn-primary" style="margin-left: 1em">Buscar</button>
                     &nbsp;
                     <button type="button" class="btn btn-secondary" style="margin-left: 1em" value="limpiar"

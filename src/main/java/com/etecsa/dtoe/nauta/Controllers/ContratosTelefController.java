@@ -251,8 +251,8 @@ public class ContratosTelefController {
         List<String> valorPlanta = contratoServicio.findPlanta();
         List<String> valorSitio = contratoServicio.findSitio();
 
-        Page<ContratosTelef> contratosTelefs = contratoServicio.findByPlantaSitio(nombpta, sitio, pageable);
-        PageRender<ContratosTelef> pageRender = new PageRender<>("/buscaplantasitio?planta=" + nombpta + "&sitio=" + sitio, contratosTelefs);
+        Page<ContratosTelef> contratosTelefs = contratoServicio.findByNombptaAndSitio(nombpta, sitio, pageable);
+        PageRender<ContratosTelef> pageRender = new PageRender<>("/buscaplantasitio?nombpta=" + nombpta + "sitio=" + sitio, contratosTelefs);
         model.addAttribute("titulo", "Oferta por Planta y Sitio");
         model.addAttribute("contratosTelefs", contratosTelefs);
         model.addAttribute("page", pageRender);
@@ -288,14 +288,14 @@ public class ContratosTelefController {
     }
 */
 
-/*
+
     @RequestMapping("/prueba")
     public String listar(Model model, @Param("servicio") String servicio) {
         model.addAttribute("ContratosTelef", contratoServicio.findByServicio(servicio));
         model.addAttribute("titulo", "Muestra en lista");
         return "prueba";
     }
-
+/*
     // En el video esto es mas grande, despues lo podemos agrandar
     @PostMapping("/form/guardar")
     public String guardarContrato(@Valid ContratosTelef contratosTelef, BindingResult result, Model model, RedirectAttributes flash) {

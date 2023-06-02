@@ -17,8 +17,8 @@
     <br>
 
     <!-- informacion en bloques -->
-    <div class="d-flex flex-row mb-3">
-        <div class="card" style="width: 18rem;">
+    <div class="d-flex flex-row mb-2">
+        <div class="card flex-fill">
             <div class="card-header bg-primary text-light text-uppercase">
                 Servicio
             </div>
@@ -37,7 +37,9 @@
                 <li class="list-group-item" th:text="${contratostelef.nombre}"></li>
             </ul>
         </div>
-        <br>
+    </div>
+    <br>
+    <div class="d-flex flex-row mb-2">
         <div class="card" style="width: 18rem;">
             <div class="card-header bg-primary text-light text-uppercase">
                 Direccion
@@ -57,7 +59,9 @@
                 <li class="list-group-item" th:text="${contratostelef.ed}"></li>
             </ul>
         </div>
-        <br>
+    </div>
+    <br>
+    <div class="d-flex flex-row mb-2">
         <div class="card" style="width: 18rem;">
             <div class="card-header bg-primary text-light text-uppercase">
                 Centro Telefonico
@@ -65,21 +69,23 @@
             <ul class="list-group list-group-flush"
                 th:each="contratostelef: ${ContratosTelef}">
                 <li class="list-group-item" th:text="${contratostelef.centrotelec}"></li>
+
             </ul>
         </div>
-        <div class="card" style="width: 18rem;">
-            <div class="card-header bg-primary text-light text-uppercase">
-                Ofertado
+            <div class="card" style="width: 18rem;">
+                <div class="card-header bg-primary text-light text-uppercase">
+                    Ofertado
+                </div>
+                <ul class="list-group list-group-flush"
+                    th:each="contratostelef: ${ContratosTelef}">
+                    <li class="list-group-item" th:text="${contratostelef.ofertado}"></li>
+                </ul>
             </div>
-            <ul class="list-group list-group-flush"
-                th:each="contratostelef: ${ContratosTelef}">
-                <li class="list-group-item" th:text="${contratostelef.ofertado}"></li>
-            </ul>
-        </div>
     </div>
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            data-id="${contratosTelef.id}">
         Solicitar Demanda
     </button>
 
@@ -92,30 +98,25 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!--
+
                     <ul th:each="contratostelef: ${ContratosTelef}">
                         <li th:text="${contratostelef.servicio}"></li>
                         <li th:text="${contratostelef.nombre}"></li>
                         <li th:text="${contratostelef.direccion}"></li>
                         <li th:text="${contratostelef.ed}"></li>
                     </ul>
-                    -->
-                    <form th:action="@{/guardar}" th:each="contratostelef: ${ContratosTelef}" method="post">
-                        <label for="ofertado">Ofertado</label>
-                        <input type="text" id="ofertado">
-                        <label for="servicio">servicio</label>
-                        <input type="text" id="servicio">
 
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                    </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </div>
-                </form>
             </div>
         </div>
     </div>
 </div>
-<footer th:replace="~{layout/layout :: footer}"></footer>
+    <footer th:replace="~{layout/layout :: footer}"></footer>
 </body>
 </html>

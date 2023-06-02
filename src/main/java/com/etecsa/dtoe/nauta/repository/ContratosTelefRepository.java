@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 /* En este ejemplo estaba haciendo una consulta directa a la BD
@@ -42,8 +44,9 @@ public interface ContratosTelefRepository extends JpaRepository<ContratosTelef, 
 
     Page<ContratosTelef> findByServicio(String servicio, Pageable pageable);
 
-    @Query("SELECT c FROM ContratosTelef c WHERE c.nombpta LIKE %?1% AND c.sitio LIKE %?2%")
-    Page<ContratosTelef> findByPlantaSitio(@Param("nombpta") String nombpta, @Param("sitio") String sitio, Pageable pageable);
+   // @Query("SELECT c FROM ContratosTelef c WHERE c.nombpta = :nombpta AND c.sitio = :sitio")
+    Page<ContratosTelef> findByNombptaAndSitio(@Param("nombpta") String nombpta, @Param("sitio") String sitio, Pageable pageable);
+
 
     //para hacer la lista de la busqueda por solicitado
     @Query("SELECT DISTINCT solicitado FROM ContratosTelef ORDER BY solicitado")

@@ -57,8 +57,8 @@ public class ContratoServicio {
         return contratosTelefRepository.findByServicio(servicio, pageable);
     }
 
-    public Page<ContratosTelef> findByPlantaSitio(String nombpta, String sitio, Pageable pageable){
-        return contratosTelefRepository.findByPlantaSitio(nombpta, sitio, pageable);
+    public Page<ContratosTelef> findByNombptaAndSitio(String nombpta, String sitio, Pageable pageable){
+        return contratosTelefRepository.findByNombptaAndSitio(nombpta, sitio, pageable);
     }
 
     // Para hacer la lista en solicitado por

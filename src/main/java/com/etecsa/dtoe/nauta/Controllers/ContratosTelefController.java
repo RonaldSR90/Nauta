@@ -75,7 +75,7 @@ public class ContratosTelefController {
         List<String> valorSitio = contratoServicio.findSitio();
         model.addAttribute("valorPlanta", valorPlanta);
         model.addAttribute("valorSitio", valorSitio);
-                
+
         Page<ContratosTelef> contratosTelefs = contratoServicio.findAll(pageRequest);
         PageRender<ContratosTelef> pageRender = new PageRender<>("/listaplants", contratosTelefs);
         model.addAttribute("titulo", "Oferta por Planta y Sitio");
@@ -91,10 +91,6 @@ public class ContratosTelefController {
     @GetMapping("/listado")
     public String listadoContratos(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
         Pageable pageRequest = PageRequest.of(page, 10, Sort.by("id"));
-// para la busqieda con select
-        List<String> valoresUnicos = contratoServicio.findDistinctSolicitado();
-        model.addAttribute("valoresUnicos", valoresUnicos);
-
         Page<ContratosTelef> contratosTelefs = contratoServicio.findBySolicitadoIsNotNull(pageRequest);
         PageRender<ContratosTelef> pageRender = new PageRender<>("/listado", contratosTelefs);
         model.addAttribute("titulo", "Oferta por solicitante");
@@ -219,25 +215,14 @@ public class ContratosTelefController {
 
     // Metodo para Buscar por solicitado
     @GetMapping("/buscasolicitado")
-    public String buscasolicitado(@RequestParam(name = "solicitado", defaultValue = "todos") String solicitado,
+    public String buscasolicitado(@RequestParam(name = "solicitado", defaultValue = "") String solicitado,
                                   @PageableDefault(size = 10, sort = "id") Pageable pageable,
                                   Model model) {
-        // Obtener los valores únicos de la columna solicitado
-        List<String> valoresUnicos = contratoServicio.findDistinctSolicitado();
-
-        Page<ContratosTelef> contratosTelefs;
-        if (solicitado.equals("todos")) {
-            contratosTelefs = contratoServicio.findBySolicitadoIsNotNull(pageable);
-            ;
-        } else {
-            contratosTelefs = contratoServicio.findBySolicitado(solicitado, pageable);
-        }
-
+        Page<ContratosTelef> contratosTelefs = contratoServicio.findBySolicitado(solicitado, pageable);
         PageRender<ContratosTelef> pageRender = new PageRender<>("/buscasolicitado?solicitado=" + solicitado, contratosTelefs);
         model.addAttribute("titulo", "Oferta por solicitante");
         model.addAttribute("contratosTelefs", contratosTelefs);
         model.addAttribute("page", pageRender);
-        model.addAttribute("valoresUnicos", valoresUnicos);
         return "listado";
     }
 
@@ -260,7 +245,6 @@ public class ContratosTelefController {
         model.addAttribute("valorSitio", valorSitio);
         return "listaplants";
     }
-
 /*
     @RequestMapping("/editar/{id}")
     public ModelAndView mostrarFormularioEditarServicio(@PathVariable(name = "id") Long id) {
@@ -288,14 +272,14 @@ public class ContratosTelefController {
     }
 */
 
-
+/*
     @RequestMapping("/prueba")
     public String listar(Model model, @Param("servicio") String servicio) {
         model.addAttribute("ContratosTelef", contratoServicio.findByServicio(servicio));
         model.addAttribute("titulo", "Muestra en lista");
         return "prueba";
     }
-/*
+
     // En el video esto es mas grande, despues lo podemos agrandar
     @PostMapping("/form/guardar")
     public String guardarContrato(@Valid ContratosTelef contratosTelef, BindingResult result, Model model, RedirectAttributes flash) {

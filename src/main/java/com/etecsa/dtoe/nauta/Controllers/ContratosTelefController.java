@@ -237,7 +237,7 @@ public class ContratosTelefController {
         List<String> valorSitio = contratoServicio.findSitio();
 
         Page<ContratosTelef> contratosTelefs = contratoServicio.findByNombptaAndSitio(nombpta, sitio, pageable);
-        PageRender<ContratosTelef> pageRender = new PageRender<>("/buscaplantasitio?nombpta=" + nombpta + "sitio=" + sitio, contratosTelefs);
+        PageRender<ContratosTelef> pageRender = new PageRender<>("/buscaplantasitio?nombpta=" + nombpta + "&sitio=" + sitio, contratosTelefs);
         model.addAttribute("titulo", "Oferta por Planta y Sitio");
         model.addAttribute("contratosTelefs", contratosTelefs);
         model.addAttribute("page", pageRender);

@@ -91,6 +91,10 @@ public class ContratosTelefController {
     @GetMapping("/listado")
     public String listadoContratos(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
         Pageable pageRequest = PageRequest.of(page, 10, Sort.by("id"));
+// para la busqieda con select
+        List<String> valoresUnicos = contratoServicio.findDistinctSolicitado();
+        model.addAttribute("valoresUnicos", valoresUnicos);
+
         Page<ContratosTelef> contratosTelefs = contratoServicio.findBySolicitadoIsNotNull(pageRequest);
         PageRender<ContratosTelef> pageRender = new PageRender<>("/listado", contratosTelefs);
         model.addAttribute("titulo", "Oferta por solicitante");
@@ -215,20 +219,32 @@ public class ContratosTelefController {
 
     // Metodo para Buscar por solicitado
     @GetMapping("/buscasolicitado")
-    public String buscasolicitado(@RequestParam(name = "solicitado", defaultValue = "") String solicitado,
+    public String buscasolicitado(@RequestParam(name = "solicitado", defaultValue = "todos") String solicitado,
                                   @PageableDefault(size = 10, sort = "id") Pageable pageable,
                                   Model model) {
-        Page<ContratosTelef> contratosTelefs = contratoServicio.findBySolicitado(solicitado, pageable);
+        // Obtener los valores únicos de la columna solicitado
+        List<String> valoresUnicos = contratoServicio.findDistinctSolicitado();
+
+        Page<ContratosTelef> contratosTelefs;
+        if (solicitado.equals("todos")) {
+            contratosTelefs = contratoServicio.findBySolicitadoIsNotNull(pageable);
+            ;
+        } else {
+            contratosTelefs = contratoServicio.findBySolicitado(solicitado, pageable);
+        }
+
         PageRender<ContratosTelef> pageRender = new PageRender<>("/buscasolicitado?solicitado=" + solicitado, contratosTelefs);
         model.addAttribute("titulo", "Oferta por solicitante");
         model.addAttribute("contratosTelefs", contratosTelefs);
         model.addAttribute("page", pageRender);
+        model.addAttribute("valoresUnicos", valoresUnicos);
         return "listado";
     }
 
     // Metodo para Buscar por Planta y Sitio
-    @GetMapping("/buscaplantasitio")
-    public String buscaplantasitio(@RequestParam(name = "nombpta", defaultValue = "") String nombpta,
+
+    @GetMapping("/buscaplantaandsitio")
+    public String buscaplantaandsitio(@RequestParam(name = "nombpta", defaultValue = "") String nombpta,
                                    @RequestParam(name = "sitio", defaultValue = "") String sitio,
                                    @PageableDefault(size = 10, sort = "id") Pageable pageable,
                                    Model model) {
@@ -237,7 +253,7 @@ public class ContratosTelefController {
         List<String> valorSitio = contratoServicio.findSitio();
 
         Page<ContratosTelef> contratosTelefs = contratoServicio.findByNombptaAndSitio(nombpta, sitio, pageable);
-        PageRender<ContratosTelef> pageRender = new PageRender<>("/buscaplantasitio?nombpta=" + nombpta + "&sitio=" + sitio, contratosTelefs);
+        PageRender<ContratosTelef> pageRender = new PageRender<>("/buscaplantaandsitio?nombpta=" + nombpta + "&sitio=" + sitio, contratosTelefs);
         model.addAttribute("titulo", "Oferta por Planta y Sitio");
         model.addAttribute("contratosTelefs", contratosTelefs);
         model.addAttribute("page", pageRender);

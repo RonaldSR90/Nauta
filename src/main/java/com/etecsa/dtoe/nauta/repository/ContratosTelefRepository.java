@@ -45,7 +45,7 @@ public interface ContratosTelefRepository extends JpaRepository<ContratosTelef, 
     Page<ContratosTelef> findByServicio(String servicio, Pageable pageable);
 
    // @Query("SELECT c FROM ContratosTelef c WHERE c.nombpta = :nombpta AND c.sitio = :sitio")
-    Page<ContratosTelef> findByNombptaAndSitio(@Param("nombpta") String nombpta, @Param("sitio") String sitio, Pageable pageable);
+    Page<ContratosTelef> findByNombptaAndSitio(@Param("planta") String nombpta, @Param("sitio") String sitio, Pageable pageable);
 
 
     //para hacer la lista de la busqueda por solicitado

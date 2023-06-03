@@ -244,7 +244,7 @@ public class ContratosTelefController {
     // Metodo para Buscar por Planta y Sitio
 
     @GetMapping("/buscaplantaandsitio")
-    public String buscaplantaandsitio(@RequestParam(name = "nombpta", defaultValue = "") String nombpta,
+    public String buscaplantaandsitio(@RequestParam(name = "planta", defaultValue = "") String nombpta,
                                    @RequestParam(name = "sitio", defaultValue = "") String sitio,
                                    @PageableDefault(size = 10, sort = "id") Pageable pageable,
                                    Model model) {
@@ -253,7 +253,7 @@ public class ContratosTelefController {
         List<String> valorSitio = contratoServicio.findSitio();
 
         Page<ContratosTelef> contratosTelefs = contratoServicio.findByNombptaAndSitio(nombpta, sitio, pageable);
-        PageRender<ContratosTelef> pageRender = new PageRender<>("/buscaplantaandsitio?nombpta=" + nombpta + "&sitio=" + sitio, contratosTelefs);
+        PageRender<ContratosTelef> pageRender = new PageRender<>("/buscaplantaandsitio?planta=" + nombpta + "&sitio=" + sitio, contratosTelefs);
         model.addAttribute("titulo", "Oferta por Planta y Sitio");
         model.addAttribute("contratosTelefs", contratosTelefs);
         model.addAttribute("page", pageRender);

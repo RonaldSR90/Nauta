@@ -32,8 +32,10 @@ public class FirmaServicio {
     public List<String> findByNombre(String nombre){
         return firmaRepository.findByNombre(nombre);
     }
-
+/*
     public List<String> findDistinctNombre(){
-        return firmaRepository.findDistinctNombre();
+        return firmaRepository.findDistinctNombre_y_apellidos();
     }
+
+ */
 }

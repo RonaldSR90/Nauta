@@ -14,5 +14,5 @@ public interface JefeCentroRepository extends JpaRepository<JefeCentro, Long> {
 
     List<String> findByNombre(String nombre);
 
-    List<String> findDistinctNombre();
+//    List<String> findDistinctNombre();
 }

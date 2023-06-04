@@ -2,15 +2,17 @@ package com.etecsa.dtoe.nauta.models.entity;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "jefes_ctlc")
-public class JefeCentro {
+public class JefeCentro implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, name = "nombre_jefe_ctlc")
+    @Column(name = "nombre_jefe_ctlc")
     private String nombre;
 
     @Column(name = "iniciales_ctlc")

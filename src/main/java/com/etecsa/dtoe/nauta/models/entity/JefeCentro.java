@@ -12,7 +12,7 @@ public class JefeCentro implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre_jefe_ctlc")
+    @Column(name = "nonmbre_jefe_ctlc")
     private String nombre;
 
     @Column(name = "iniciales_ctlc")

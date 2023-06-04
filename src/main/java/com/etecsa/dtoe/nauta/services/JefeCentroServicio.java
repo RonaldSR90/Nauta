@@ -32,10 +32,5 @@ public class JefeCentroServicio {
     public List<String> findByNombre(String nombre){
         return jefeCentroRepository.findByNombre(nombre);
     }
-/*
-    public List<String> findDistinctNombre(){
-        return jefeCentroRepository.findDistinctNombre();
-    }
 
- */
 }

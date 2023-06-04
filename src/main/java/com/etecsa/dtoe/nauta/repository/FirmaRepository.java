@@ -15,9 +15,4 @@ public interface FirmaRepository extends JpaRepository<Firma, Long> {
 
     List<String> findByNombre(String nombre);
 
-/*
-    @Query("SELECT DISTINCT nombre_y_apellidos FROM firma ORDER BY nombre_y_apellidos")
-    List<String> findDistinctNombre_y_apellidos();
-
- */
 }

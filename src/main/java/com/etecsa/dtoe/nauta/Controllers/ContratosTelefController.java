@@ -5,6 +5,7 @@ import com.etecsa.dtoe.nauta.services.ContratoServicio;
 import com.etecsa.dtoe.nauta.util.paginacion.PageRender;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

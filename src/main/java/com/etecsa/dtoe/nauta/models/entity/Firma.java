@@ -11,22 +11,18 @@ public class Firma implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    @Column(name = "nombre_y_apellidos")
+    @Column(nullable = false, name = "nombre_y_apellidos")
     private String nombre;
 
-    @Column(nullable = false)
     @Column(name = "cargo")
     private String cargo;
 
     @Column(name = "en_funciones")
     private String funcion;
 
-    @Column(nullable = false)
     @Column(name = "letra_firma")
     private String letra;
 
-    @Column(nullable = false)
     @Column(name = "division_territorial")
     private String division;
 

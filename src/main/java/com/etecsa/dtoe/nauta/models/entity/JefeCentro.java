@@ -10,19 +10,15 @@ public class JefeCentro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    @Column(name = "nombre_jefe_ctlc")
+    @Column(nullable = false, name = "nombre_jefe_ctlc")
     private String nombre;
 
-    @Column(nullable = false)
     @Column(name = "iniciales_ctlc")
     private String inicial;
 
-    @Column(nullable = false)
     @Column(name = "ctlc")
     private String centro;
 
-    @Column(nullable = false)
     @Column(name = "responsabilidad")
     private String responsabilidad;
 

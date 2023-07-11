@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 /* En este ejemplo estaba haciendo una consulta directa a la BD
 @Repository
 public interface ContratosTelefRepository extends JpaRepository<ContratosTelef, String> {
@@ -58,6 +59,19 @@ public interface ContratosTelefRepository extends JpaRepository<ContratosTelef, 
 
     @Query("SELECT DISTINCT sitio FROM ContratosTelef ORDER BY sitio")
     List<String> findSitio();
+
+
+/*
+    @Query("SELECT DISTINCT sitio FROM ContratosTelef WHERE nombpta = :nombpta ORDER BY sitio")
+    List<String> findSitioByNombpta(@Param("nombpta") String nombpta);
+
+ */
+
+    List<String> findByNombpta(@Param("planta") String nombpta);
+
+
+
+
 
 
 }

@@ -8,7 +8,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Service
@@ -73,6 +76,29 @@ public class ContratoServicio {
 
     public List<String> findSitio(){
         return contratosTelefRepository.findSitio();
+    }
+
+
+
+
+/*
+    public List<String> findSitioByNombpta(){
+        return contratosTelefRepository.findSitioByNombpta();
+    }
+ */
+/*
+    public List<String> findSitioByPlanta(String planta) {
+        List<ContratosTelef> contratosTelefs = contratosTelefRepository.findByNombpta(planta);
+        Set<String> sitios = new HashSet<>();
+        for (ContratosTelef contrato : contratosTelefs) {
+            sitios.add(contrato.getSitio());
+        }
+        return new ArrayList<>(sitios);
+    }
+
+ */
+    public List<String> findByPlanta(String nombpta){
+        return contratosTelefRepository.findByNombpta(nombpta);
     }
 
 }

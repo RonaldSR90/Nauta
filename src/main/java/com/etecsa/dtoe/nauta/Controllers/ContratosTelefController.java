@@ -3,10 +3,6 @@ package com.etecsa.dtoe.nauta.Controllers;
 import com.etecsa.dtoe.nauta.models.entity.ContratosTelef;
 import com.etecsa.dtoe.nauta.services.ContratoServicio;
 import com.etecsa.dtoe.nauta.util.paginacion.PageRender;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,13 +12,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.*;
 
 
 @Controller
@@ -69,11 +61,15 @@ public class ContratosTelefController {
 
     // Listado para la busqueda por planta y sitio
     @GetMapping("/listaplants")
-    public String listarPlantaSitio(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
+    public String listarPlantaSitio(@RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "planta", defaultValue = "") String nombpta, Model model) {
         Pageable pageRequest = PageRequest.of(page, 10, Sort.by("id"));
         //para la busqueda con select
         List<String> valorPlanta = contratoServicio.findPlanta();
         List<String> valorSitio = contratoServicio.findSitio();
+        //String nombpta = valorPlanta.get();
+        //List<String> valorSitio = contratoServicio.findSitioByPlanta(nombpta);
+
+
         model.addAttribute("valorPlanta", valorPlanta);
         model.addAttribute("valorSitio", valorSitio);
 
@@ -85,6 +81,15 @@ public class ContratosTelefController {
 
         return "listaplants";
     }
+/*
+    // Veamos como queda esto
+    @GetMapping("/sitios")
+    @ResponseBody
+    public List<String> getSitiosByPlanta(@RequestParam(name = "planta", defaultValue = "") String planta) {
+        return contratoServicio.findSitioByPlanta(planta);
+    }
+
+ */
 
     /* Probando otras funcionalidades sobre el listado con paginacion
      * Este solo muestra en la tabla los valores que tiene el campo Solicitado por como no vacio
@@ -253,6 +258,9 @@ public class ContratosTelefController {
         List<String> valorPlanta = contratoServicio.findPlanta();
         List<String> valorSitio = contratoServicio.findSitio();
 
+        // Filtrar los sitios basándose en el valor seleccionado de planta
+       // List<String> valorSitio = contratoServicio.findSitioByPlanta(nombpta);
+
         Page<ContratosTelef> contratosTelefs = contratoServicio.findByNombptaAndSitio(nombpta, sitio, pageable);
         PageRender<ContratosTelef> pageRender = new PageRender<>("/buscaplantaandsitio?planta=" + nombpta + "&sitio=" + sitio, contratosTelefs);
         model.addAttribute("titulo", "Oferta por Planta y Sitio");
@@ -261,6 +269,12 @@ public class ContratosTelefController {
         model.addAttribute("valorPlanta", valorPlanta);
         model.addAttribute("valorSitio", valorSitio);
         return "listaplants";
+    }
+
+
+    @GetMapping("/sitios/{planta}")
+        public @ResponseBody List<String> getSitiosByPlanta(@PathVariable("planta") String planta) {
+        return contratoServicio.findByPlanta(planta);
     }
 /*
     @RequestMapping("/editar/{id}")
@@ -289,14 +303,14 @@ public class ContratosTelefController {
     }
 */
 
-/*
+
     @RequestMapping("/prueba")
     public String listar(Model model, @Param("servicio") String servicio) {
         model.addAttribute("ContratosTelef", contratoServicio.findByServicio(servicio));
         model.addAttribute("titulo", "Muestra en lista");
         return "prueba";
     }
-
+/*
     // En el video esto es mas grande, despues lo podemos agrandar
     @PostMapping("/form/guardar")
     public String guardarContrato(@Valid ContratosTelef contratosTelef, BindingResult result, Model model, RedirectAttributes flash) {

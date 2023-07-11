@@ -1,5 +1,6 @@
 package com.etecsa.dtoe.nauta.services;
 
+import com.etecsa.dtoe.nauta.repository.SitioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,5 +8,5 @@ import org.springframework.stereotype.Service;
 public class SitioService {
 
     @Autowired
-    private SitioService sitioService;
+    private SitioRepository sitioRepository;
 }

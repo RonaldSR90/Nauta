@@ -12,18 +12,7 @@
             <!-- Formulario de busqueda -->
             <div>
                 <form class="d-flex form-inline" th:action="@{/buscaplantaandsitio}">
-                    <div class="form-floating col-xs-4">
-                        <!--        <input type="text" class="form-control" id="planta" name="planta"
-                                       placeholder="Planta">
-                                <label for="planta">Introducir Planta</label>
-                            </div>
-                            &nbsp;
-                            <div class="form-floating col-xs-4">
-                                <input type="text" class="form-control" id="sitio" name="sitio"
-                                       placeholder="Sitio">
-                                <label for="sitio">Introducir Sitio</label>
-                            </div>    -->
-
+                    <div>
                         <!-- Intento de hacerlo con lista desplegable -->
                         <!--
                         <select id="plantaSelect" onchange="filtrarSitios(this.value)" name="planta" class="form-select"
@@ -45,18 +34,17 @@
                         </select>
                         -->
                         <!-- Tratando de usar JS para la busqueda -->
-                        <select id="planta" name="planta" class="form-select"
+                        <label for="select1" class="text-uppercase text-primary"> Planta</label>
+                        <select id="select1" name="planta" class="form-select"
                                 aria-label=".form-select-lg example">
-                            <option value="">Selecciona Planta</option>
-                            <th:block th:each="valor : ${valorPlanta}">
-                                <option th:value="${valor}" th:text="${valor}"></option>
-                            </th:block>
+                            <option selected>--Seleccione--</option>
                         </select>
 
                     </div>
-                    <div class="form-floating col-xs-4">
-                        <select id="sitio" name="sitio" class="form-select" aria-label=".form-select-lg example">
-                            <option value="">Selecciona Sitio</option>
+                    <div>
+                        <label for="select2" class="text-uppercase text-primary"> Sitio</label>
+                        <select id="select2" name="sitio" class="form-select" aria-label=".form-select-lg example">
+                            <option selected>--Seleccione--</option>
                         </select>
                     </div>
 
@@ -88,7 +76,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tbody>
+                    <tbody class="table-group-divider">
                     <tr th:each="contratostelef: ${contratosTelefs}">
                         <td th:text="${contratostelef.servicio}"></td>
                         <td th:text="${contratostelef.ed}"></td>
@@ -119,32 +107,169 @@
     }
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!--
     <script>
-        $(document).ready(function () {
-  // Event listener for plant select change
-  $('#planta').change(function() {
-    var selectedPlanta = $(this).val();
+       function cargarSitios() {
+            var plantaId = document.getElementById("planta").value;
+            var sitioSelect = document.getElementById("sitio");
 
-    // Make AJAX request to server
-    $.ajax({
-      url: '/sitios/' + selectedPlanta,
-      type: 'GET',
-      success: function(data) {
-        // Clear sitio select options
-        $('#sitio').empty();
+            // Limpiar opciones anteriores
+            sitioSelect.innerHTML = "";
 
-        // Add new options based on the response data
-        $.each(data, function(index, sitio) {
-          var option = $('<option>').val(sitio).text(sitio);
-          $('#sitio').append(option);
-        });
-      },
-      error: function(xhr, status, error) {
-        console.error(error);
-      }
-    });
-  });
-});
+            // Realizar una solicitud AJAX al servidor para obtener los sitios asociados a la planta seleccionada
+            if (plantaId) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "/api/sitios?plantaId=" + plantaId, true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var sitios = JSON.parse(xhr.responseText);
+
+                        // Agregar las opciones al select de sitios
+                        for (var i = 0; i < sitios.length; i++) {
+                            var option = document.createElement("option");
+                            option.value = sitios[i].id;
+                            option.textContent = sitios[i].nombre;
+                            sitio.appendChild(option);
+                        }
+                    }
+                };
+                xhr.send();
+            }
+        }
+    </script>
+   -->
+
+    <script>
+        let $select1 = document.getElementById('select1')
+let $select2 = document.getElementById('select2')
+
+
+let select1 = ['ARROYO ARENA', 'BARBOSA', 'BUENAVISTA','CLUB HABANA', 'CORONELA', 'CUBANACAN','FRAGA','GIE CARNET DE IDENTIDAD 1C','GIE CM CIUDAD LIBERTAD 1','GIE CM CIUDAD LIBERTAD 2','GIE CONCEPCION 2','GIE HABAN-FINLAY1','GIE HABAN 222 y 37-1', 'GIE HABAN 222 y 37-2', 'GIE HABAN XX ANIVERSARIO 1', 'GIE HABAN XX ANIVERSARIO 2','GIE JAIMANITAS','GIE SAN AGUSTIN','GIE SANTA FE 1','GIE SANTA FE 2','GIE SANTA FE 3','GIE SANTA FE 4','GUATAO', 'INDOOR PUNTA BRAVA', 'LA COLMENA', 'LA LISA', 'LAGUITO', 'MARIANAO', 'PUNTA BRAVA', 'SANTA FE','VALLE GRANDE', 'XX ANIVERSARIO', 'PALATINO'];
+let select2 = ['ARROYO ARENA 1', 'ARROYO ARENA 2', 'ARROYO ARENA 3', 'BARBOSA', 'BUENAVISTA NGN', 'CARNET DE IDENTIDAD','DEFENSA CIVIL', 'GEOCUBA', 'INMIGRACION', 'KOLHY', 'LA COPA', 'MONTE BARRETO', 'CLUB HABANA', 'CUBANACAN', 'LA CORONELA','CUBANACAN','DEFENSA CIVIL', 'LISA', 'MARIANAO','REPARTO FRAGA', 'GIE CARNET DE IDENTIDAD 1C', 'GIE CM CIUDAD LIBERTAD 1', 'GIE CM CIUDAD LIBERTAD 2','GIE CONCEPCION 2', 'GIE HABAN 222 y 37-1', 'GIE HABAN 222 y 37-2', 'GIE HABAN XX ANIVERSARIO 1', 'GIE HABAN XX ANIVERSARIO 2','GIE HABAN-FINLAY1', 'GIE JAIMANITAS', 'SAN AGUSTIN 1', 'GIE SANTA FE 1', 'GIE SANTA FE 2', 'GIE SANTA FE 3', 'GIE SANTA FE 4','GUATAO', 'INDOOR PUNTA BRAVA', '100 VIVIENDAS','CUBANACAN','LA CORONELA','LISA', 'LISA NGN', 'MARIANAO', 'LAGUITO', 'CUJAE','MARIANAO', 'POCITO_PALMAR_1','POCITO_PALMAR_2','POCITO_PALMAR_3', 'PUNTA BRAVA 1', 'PUNTA BRAVA 2', 'SANTA FE', 'SANTA FE (MNAO)', 'VALLE GRANDE', 'XX ANVERSARIO', 'Palatino 1'];
+
+function mostrarLugares(arreglo, lugar) {
+    let elementos = '<option selected disables>--Seleccione--</option>'
+
+    for(let i = 0; i < arreglo.length; i++) {
+        elementos += '<option value="' + arreglo[i] +'">' + arreglo[i] +'</option>'
+    }
+
+    lugar.innerHTML = elementos
+}
+
+mostrarLugares(select1, $select1)
+
+function recortar(array, inicio, fin, lugar) {
+    let recortar = array.slice(inicio, fin)
+    mostrarLugares(recortar, lugar)
+}
+
+$select1.addEventListener('change', function() {
+    let valor = $select1.value
+
+    switch(valor) {
+        case 'ARROYO ARENA':
+            recortar(select2, 0, 3, $select2)
+        break
+        case 'BARBOSA':
+            recortar(select2, 3, 4, $select2)
+        break
+         case 'BUENAVISTA':
+            recortar(select2, 4, 12, $select2)
+        break
+        case 'CLUB HABANA':
+            recortar(select2, 12, 13, $select2)
+        break
+        case 'CORONELA':
+            recortar(select2, 13, 15, $select2)
+        break
+        case 'CUBANACAN':
+            recortar(select2, 15, 19, $select2)
+        break
+        case 'FRAGA':
+            recortar(select2, 19, 20, $select2)
+        break
+        case 'GIE CARNET DE IDENTIDAD 1C':
+            recortar(select2, 20, 21, $select2)
+        break
+        case 'GIE CM CIUDAD LIBERTAD 1':
+            recortar(select2, 21, 22, $select2)
+        break
+        case 'GIE CM CIUDAD LIBERTAD 2':
+            recortar(select2, 22, 23, $select2)
+        break
+        case 'GIE CONCEPCION 2':
+            recortar(select2, 23, 24, $select2)
+        break
+        case 'GIE HABAN 222 y 37-1':
+            recortar(select2, 24, 25, $select2)
+        break
+        case 'GIE HABAN 222 y 37-2':
+            recortar(select2, 25, 26, $select2)
+        break
+        case 'GIE HABAN XX ANIVERSARIO 1':
+            recortar(select2, 26, 27, $select2)
+        break
+        case 'GIE HABAN XX ANIVERSARIO 2':
+            recortar(select2, 27, 28, $select2)
+        break
+        case 'GIE HABAN-FINLAY1':
+            recortar(select2, 28, 29, $select2)
+        break
+        case 'GIE JAIMANITAS':
+            recortar(select2, 29, 30, $select2)
+        break
+        case 'GIE SAN AGUSTIN':
+            recortar(select2, 30, 31, $select2)
+        break
+        case 'GIE SANTA FE 1':
+            recortar(select2, 31, 32, $select2)
+        break
+        case 'GIE SANTA FE 2':
+            recortar(select2, 32, 33, $select2)
+        break
+        case 'GIE SANTA FE 3':
+            recortar(select2, 33, 34, $select2)
+        break
+        case 'GIE SANTA FE 4':
+            recortar(select2, 34, 35, $select2)
+        break
+        case 'GUATAO':
+            recortar(select2, 35, 36, $select2)
+        break
+        case 'INDOOR PUNTA BRAVA':
+            recortar(select2, 36, 37, $select2)
+        break
+        case 'LA COLMENA':
+            recortar(select2, 37, 38, $select2)
+        break
+        case 'LA LISA':
+            recortar(select2, 38, 43, $select2)
+        break
+        case 'LAGUITO':
+            recortar(select2, 43, 44, $select2)
+        break
+        case 'MARIANAO':
+            recortar(select2, 44, 49, $select2)
+        break
+        case 'PUNTA BRAVA':
+            recortar(select2, 49, 51, $select2)
+        break
+        case 'SANTA FE':
+            recortar(select2, 51, 53, $select2)
+        break
+        case 'VALLE GRANDE':
+            recortar(select2, 53, 54, $select2)
+        break
+        case 'XX ANIVERSARIO':
+            recortar(select2, 54, 55, $select2)
+        break
+        case 'PALATINO':
+            recortar(select2, 55, 56, $select2)
+        break
+    }
+
+})
     </script>
 
     <footer th:replace="~{layout/layout :: footer}"></footer>

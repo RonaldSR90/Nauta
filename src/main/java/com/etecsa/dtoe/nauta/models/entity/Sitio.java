@@ -21,12 +21,6 @@ public class Sitio implements Serializable {
     public Sitio() {
     }
 
-    public Sitio(Long id, String sitio, Planta planta) {
-        this.id = id;
-        this.sitio = sitio;
-        this.planta = planta;
-    }
-
     public Long getId() {
         return id;
     }

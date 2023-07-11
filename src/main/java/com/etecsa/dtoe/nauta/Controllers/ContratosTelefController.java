@@ -64,14 +64,18 @@ public class ContratosTelefController {
     public String listarPlantaSitio(@RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "planta", defaultValue = "") String nombpta, Model model) {
         Pageable pageRequest = PageRequest.of(page, 10, Sort.by("id"));
         //para la busqueda con select
+        /*
         List<String> valorPlanta = contratoServicio.findPlanta();
         List<String> valorSitio = contratoServicio.findSitio();
+         */
         //String nombpta = valorPlanta.get();
         //List<String> valorSitio = contratoServicio.findSitioByPlanta(nombpta);
 
-
+/*
         model.addAttribute("valorPlanta", valorPlanta);
         model.addAttribute("valorSitio", valorSitio);
+
+ */
 
         Page<ContratosTelef> contratosTelefs = contratoServicio.findAll(pageRequest);
         PageRender<ContratosTelef> pageRender = new PageRender<>("/listaplants", contratosTelefs);
@@ -255,8 +259,8 @@ public class ContratosTelefController {
                                    @PageableDefault(size = 10, sort = "id") Pageable pageable,
                                    Model model) {
 
-        List<String> valorPlanta = contratoServicio.findPlanta();
-        List<String> valorSitio = contratoServicio.findSitio();
+        //List<String> valorPlanta = contratoServicio.findPlanta();
+        //List<String> valorSitio = contratoServicio.findSitio();
 
         // Filtrar los sitios basándose en el valor seleccionado de planta
        // List<String> valorSitio = contratoServicio.findSitioByPlanta(nombpta);
@@ -266,8 +270,11 @@ public class ContratosTelefController {
         model.addAttribute("titulo", "Oferta por Planta y Sitio");
         model.addAttribute("contratosTelefs", contratosTelefs);
         model.addAttribute("page", pageRender);
+        /*
         model.addAttribute("valorPlanta", valorPlanta);
         model.addAttribute("valorSitio", valorSitio);
+
+         */
         return "listaplants";
     }
 

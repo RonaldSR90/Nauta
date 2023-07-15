@@ -66,7 +66,8 @@
                         <td th:text="${contratostelef.ofertado}"></td>
                         <td th:text="${contratostelef.fecha_autorizo}"></td>
                         <td th:text="${contratostelef.fecha_alta}"></td>
-                        <td><a class="btn btn-warning" th:href="@{'/solicitar/' + ${contratostelef.id}}">Solicitar</a></td>
+                        <td><a class="btn btn-warning" th:href="@{'/solicitar/' + ${contratostelef.id}}">Solicitar</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -78,6 +79,7 @@
     function limpiarCampos(){
     window.location='/buscar'
     }
+
 </script>
 <footer th:replace="~{layout/layout :: footer}"></footer>
 </body>

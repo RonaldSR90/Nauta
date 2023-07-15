@@ -8,9 +8,10 @@
 <body>
 
 <header th:fragment="header">
-    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #03045e;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">NautaH</a>
+            <a class="navbar-brand" href="/"><img th:src="@{/img/logo.png}" alt="ETECSA" width="50px"
+                                                  class="d-inline-block align-text-top"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -19,10 +20,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/buscar">Introducir demandas</a>
+                        <a class="nav-link active" aria-current="page" href="/buscar">Introducir demandas</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
                            aria-expanded="false">
                             Realizar Ofertas
                         </a>
@@ -30,12 +31,22 @@
                             <li><a class="dropdown-item" href="/listado">Oferta por solicitante</a></li>
                             <li><a class="dropdown-item" href="/listaserv">Oferta por servicio</a></li>
                             <li><a class="dropdown-item" href="/listaplants">Oferta por Planta Telefónica/Sitio</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="#">Imprimir oferta</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled">Disabled</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Otros
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Chequear disponibilidad en DSLAM</a></li>
+                            <li><a class="dropdown-item" href="#">Control de ofertas realizadas</a></li>
+                            <li><a class="dropdown-item" href="#">Reportes y estadisticas</a></li>
+                        </ul>
                     </li>
                 </ul>
                 <!--           <form class="d-flex" role="search">
@@ -47,10 +58,15 @@
     </nav>
 </header>
 <div class="container"></div>
+<br>
 
-<footer th:fragment="footer" class="container">
+<footer th:fragment="footer" >
+    <div class="bg-light text-center p-3">
+        <P class="small">Copyright &copy; 2023 ETECSA, Todos los derechos reservados</P>
+    </div>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/js/jquery-3.7.0.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </footer>
 </body>
 </html>
